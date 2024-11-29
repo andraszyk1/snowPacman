@@ -13,7 +13,7 @@ animation-name: bgFlaying;
 animation-duration: 60s;
 animation-iteration-count: infinite;
 background-image: url('/background.jpg');
-background-size: cover;
+background-size:200%;
 animation: snowAnimation;
 animation-duration: 200s;
 animation-fill-mode: none;
@@ -133,7 +133,8 @@ animation-iteration-count: infinite;
   
 }
 @keyframes snowAnimation {
-  0% {  background-position-y:0}
-  100% { background-position-y:10000%}
+  0% {  background-position-x:0}
+  50% { background-position-x:100%}
+  0% {  background-position-x:0}
   
 }
