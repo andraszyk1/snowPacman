@@ -140,9 +140,9 @@ checkPlayerWinner(){
       this.enemies.forEach((enemy) => {
         enemy.changePosition();
       });
-      // this.enemies.forEach((enemy) => {
-      //   enemy.randomChangeDirect();
-      // });
+      this.enemies.forEach((enemy) => {
+        enemy.randomChangeDirect();
+      });
     }, Player.speed);
     // this.intervalEnemiesPosition=setInterval(() => {
    
