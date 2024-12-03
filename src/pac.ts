@@ -15,7 +15,8 @@ export class Pac {
     this.enemies = []; 
     this.foodTab=[]
     this.player = new Player(nick, 0, 0);
-    this.player.changeDirection();
+
+    this.player.changeDirection()
     this.addEnemies();
     this.createFood()
     this.createScoresDiv()
@@ -59,10 +60,13 @@ export class Pac {
   }
   checkGameOver() {
     this.enemies.forEach((enemy) => {
+      // console.log("Enemy X", enemy.playerDiv.offsetLeft,"Player X",this.player.playerDiv.offsetLeft , "Enemy Y",enemy.playerDiv.offsetTop,"Player Y",this.player.playerDiv.offsetTop);
       if (
         enemy.playerDiv.offsetLeft === this.player.playerDiv.offsetLeft &&
         enemy.playerDiv.offsetTop === this.player.playerDiv.offsetTop
       ) {
+       
+        
         console.log("game over");
         this.createGameOver()
 
@@ -88,7 +92,6 @@ export class Pac {
     }
   }
   checkIfPacmanEat(){
-    console.log(this.foodTab);
   this.foodTab.forEach((food,index)=>{
     if (
       food.offsetLeft === this.player.playerDiv.offsetLeft &&
@@ -128,22 +131,25 @@ checkPlayerWinner(){
   
   game() {
     this.intervalPlayer=setInterval(() => {
-      this.player.changePosition();
+   
+      this.player.changePosition()
       this.checkGameOver();
       this.checkIfPacmanEat();
       this.checkPlayerWinner();
       this.createScoresDiv()
-    }, Player.speed);
-    this.intervalEnemiesPosition=setInterval(() => {
       this.enemies.forEach((enemy) => {
         enemy.changePosition();
       });
-    },  Enemy.intervalForChangePosition);
-    this.intervalEnemiesDirection=setInterval(() => {
-      this.enemies.forEach((enemy) => {
-        enemy.randomChangeDirect();
-      });
-    }, Enemy.timeForChangeDirection);
-    this.levelUp()
+      // this.enemies.forEach((enemy) => {
+      //   enemy.randomChangeDirect();
+      // });
+    }, Player.speed);
+    // this.intervalEnemiesPosition=setInterval(() => {
+   
+    // },  Enemy.intervalForChangePosition);
+    // this.intervalEnemiesDirection=setInterval(() => {
+   
+    // }, Enemy.timeForChangeDirection);
+    // this.levelUp()
   }
 }

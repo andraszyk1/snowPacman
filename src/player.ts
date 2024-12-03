@@ -40,25 +40,56 @@ export class Player {
     if (this.positionX!==undefined) {
       this.positionX = this.positionX - Player.step;
       this.playerDiv.style.left = `${this.positionX}px`;
+      // console.log( this.playerDiv.style.left,this.playerDiv.offsetLeft);
     }
   }
   moveRight() {
     if (this.positionX!==undefined) {
-    this.positionX = this.positionX + Player.step;
+    this.positionX = this.positionX+ Player.step;
     this.playerDiv.style.left = `${this.positionX}px`;
+    // console.log( this.playerDiv.style.left,this.playerDiv.offsetLeft);
   }
   }
   moveUp() {
     if (this.positionY!==undefined) {
     this.positionY = this.positionY - Player.step;
     this.playerDiv.style.top = `${this.positionY}px`;
+    console.log( this.positionY);
   }
   }
   moveDown() {
     if(this.positionY!==undefined){
-    this.positionY = this.positionY + Player.step;
+    this.positionY = this.positionY  + Player.step;
     this.playerDiv.style.top = `${this.positionY}px`;
+    console.log( this.positionY);
+  }}
+  moveLeftStop(){
+    console.log("moveLeftStop");
+    if(this.positionY!==undefined&&this.positionX!==undefined){
+      this.positionX = 0;
+      this.positionY = this.positionY;
+    }
   }
+  moveRightStop(){
+    console.log("moveLeftStop");
+    if(this.positionY!==undefined&&this.positionX!==undefined && this.pacContainer){
+      this.positionX = this.pacContainer?.clientWidth-this.playerDiv.offsetWidth;
+      this.positionY = this.positionY;
+    }
+  }
+  moveUpStop(){
+    console.log("moveUpStop");
+    if(this.positionY!==undefined&&this.positionX!==undefined){
+      this.positionX = this.positionX;
+      this.positionY = 0;
+    }
+  }
+  moveDownStop(){
+    console.log("moveUpStop");
+    if(this.positionY!==undefined&&this.positionX!==undefined&&this.pacContainer){
+      this.positionX = this.positionX;
+      this.positionY = this.pacContainer?.clientHeight-this.playerDiv.offsetHeight;
+    }
   }
   changeDirection() {
     document.addEventListener("keydown", (e: KeyboardEvent) => {
@@ -71,14 +102,15 @@ export class Player {
   }
   changePosition() {
     if(this.positionX!==undefined &&  this.pacContainer?.clientHeight!==undefined && this.positionY!==undefined){
-    if (this.direct === "left") this.moveLeft();
-    if (this.direct === "left" && this.positionX < 0) this.moveRight();
-    if (this.direct === "right") this.moveRight();
-    if (this.direct === "right" && this.positionX > this.pacContainer?.clientWidth - this.playerDiv.offsetWidth)this.moveLeft();
-    if (this.direct === "up") this.moveUp();
-    if (this.direct === "up" && this.positionY < 0) this.moveDown();
-    if (this.direct === "down") this.moveDown();
-    if (this.direct === "down" && this.positionY > this.pacContainer?.clientHeight - this.playerDiv.offsetHeight)this.moveUp();
+    if (this.direct === "left"&& this.positionX > 0) this.moveLeft();
+    if (this.direct === "left"&& this.positionX < 0) this.moveLeftStop();
+    if (this.direct === "right"&&this.positionX < this.pacContainer?.clientWidth - this.playerDiv.offsetWidth) this.moveRight();
+    if (this.direct === "right"&&this.positionX > this.pacContainer?.clientWidth - this.playerDiv.offsetWidth) this.moveRightStop();
+    if (this.direct === "up"&& this.positionY <0) this.moveUpStop();
+    if (this.direct === "up"&& this.positionY >0 ) this.moveUp()
+    if (this.direct === "down"&& this.playerDiv.offsetTop < this.pacContainer?.clientHeight - this.playerDiv.offsetHeight) this.moveDown();
+    if (this.direct === "down"&& this.playerDiv.offsetTop > this.pacContainer?.clientHeight - this.playerDiv.offsetHeight)  this.moveDownStop();
+  
   }
 }
  
