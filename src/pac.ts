@@ -137,19 +137,19 @@ checkPlayerWinner(){
       this.checkIfPacmanEat();
       this.checkPlayerWinner();
       this.createScoresDiv()
+ 
+    
+    }, Player.speed);
+    this.intervalEnemiesPosition=setInterval(() => {
       this.enemies.forEach((enemy) => {
         enemy.changePosition();
       });
-    
-    }, Player.speed);
-    // this.intervalEnemiesPosition=setInterval(() => {
-   
-    // },  Enemy.intervalForChangePosition);
+    },  Enemy.intervalForChangePosition);
     this.intervalEnemiesDirection=setInterval(() => {
       this.enemies.forEach((enemy) => {
         enemy.randomChangeDirect();
       });
     }, Enemy.timeForChangeDirection);
-    // this.levelUp()
+    this.levelUp()
   }
 }
