@@ -47,7 +47,7 @@ export class Player {
     if (this.positionX!==undefined) {
     this.positionX = this.positionX+ Player.step;
     this.playerDiv.style.left = `${this.positionX}px`;
-    // console.log( this.playerDiv.style.left,this.playerDiv.offsetLeft);
+    console.log( this.playerDiv.style.left,this.playerDiv.offsetLeft);
   }
   }
   moveUp() {

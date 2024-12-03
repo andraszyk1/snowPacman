@@ -20,6 +20,17 @@ animation-fill-mode: none;
 animation-timing-function:linear;
 animation-iteration-count: infinite;
 
+
+}
+.destroy{
+  animation: destroy;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
+}
+@keyframes destroy {
+  0%{opacity:1;}
+  100%{opacity: 0;top:-2000px;left:2000px}
+  
 }
 .lunchBox{
   display: flex;  position: absolute;

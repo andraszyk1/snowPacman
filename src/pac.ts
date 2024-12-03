@@ -57,20 +57,20 @@ export class Pac {
     gameOver.classList.add('gameOver')
     gameOver.textContent="GAME OVER"
     this.pacContainer?.appendChild(gameOver)
+    this.player.playerDiv.classList.add("destroy")
   }
   checkGameOver() {
     this.enemies.forEach((enemy) => {
-      // console.log("Enemy X", enemy.playerDiv.offsetLeft,"Player X",this.player.playerDiv.offsetLeft , "Enemy Y",enemy.playerDiv.offsetTop,"Player Y",this.player.playerDiv.offsetTop);
+      if(enemy.positionX!==undefined && this.player.positionX!=undefined && enemy.positionY!==undefined && this.player.positionY!==undefined){
       if (
-        enemy.playerDiv.offsetLeft === this.player.playerDiv.offsetLeft &&
-        enemy.playerDiv.offsetTop === this.player.playerDiv.offsetTop
+        (enemy.playerDiv.offsetLeft-this.player.playerDiv.offsetLeft<=120 && enemy.playerDiv.offsetLeft-this.player.playerDiv.offsetLeft>=-120) &&
+        (enemy.playerDiv.offsetTop-this.player.playerDiv.offsetTop)<=120&&(enemy.playerDiv.offsetTop-this.player.playerDiv.offsetTop)>=-120
+      
       ) {
-       
-        
         console.log("game over");
         this.createGameOver()
 
-      }
+      }}
     });
   }
   createFood(){
@@ -140,16 +140,16 @@ checkPlayerWinner(){
       this.enemies.forEach((enemy) => {
         enemy.changePosition();
       });
-      this.enemies.forEach((enemy) => {
-        enemy.randomChangeDirect();
-      });
+    
     }, Player.speed);
     // this.intervalEnemiesPosition=setInterval(() => {
    
     // },  Enemy.intervalForChangePosition);
-    // this.intervalEnemiesDirection=setInterval(() => {
-   
-    // }, Enemy.timeForChangeDirection);
+    this.intervalEnemiesDirection=setInterval(() => {
+      this.enemies.forEach((enemy) => {
+        enemy.randomChangeDirect();
+      });
+    }, Enemy.timeForChangeDirection);
     // this.levelUp()
   }
 }
